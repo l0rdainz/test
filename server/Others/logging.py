@@ -21,7 +21,7 @@ class APILogger():
         logger.setLevel(logging.INFO)
         logger.addHandler(file_handler)
 
-        logger.propagate = False # Turn off logging to console
+        logger.propagate = True # Turn off logging to console
 
         self.logger = logger
         self.record_type = record_type

@@ -5,6 +5,7 @@ import jwt
 import datetime 
 import json
 
+
 JWT_SECRET = '7889ecd3b023c325b8a7852268eb85c339df5da29f9cbc0ce5e381ebdac58767'
 #put in .env file then generate smth more secure using openssl rand -hex 32
 
@@ -15,7 +16,8 @@ from server.API.user import (
     retrieve_users,
     update_user,
     authenticate_user,
-    get_user_from_token
+    get_user_from_token,
+    get_nearby_users
 )
 from server.schema.user import (
     ErrorResponseModel,
@@ -34,8 +36,7 @@ async def add_user_data(user: user = Body(...)):
     if new_user == False:
          raise HTTPException(
             status_code=404,
-            detail="Duplicate Email",
-            
+            detail="Duplicate User ID",        
         )
     else:
         return ResponseModel(new_user, "Added successfully.")
@@ -83,7 +84,14 @@ async def get_user_data(id):
     user = await retrieve_user(id)
     if user:
         return ResponseModel(user, "User data retrieved successfully")
-    return ErrorResponseModel("An error occurred.", 404, "User doesn't exist,retard.")
+    return ErrorResponseModel("An error occurred.", 404, "User doesn't exist.")
+
+@router.get("/nearby/{id}", response_description="Nearby users retrieved")
+async def get_user_data(id):
+    users = await get_nearby_users(id)
+    if users:
+        return ResponseModel(users, "Nearby users retrieved successfully")
+    return ErrorResponseModel("An error occurred.", 404, "User doesn't exist.")
 
 @router.put("/update/{id}")
 async def update_user_data(id: str, req: Updateuser = Body(...)):

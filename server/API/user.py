@@ -1,20 +1,21 @@
 from http.client import HTTPException
+from operator import gt
 from server.Others.logging import APILogger
 from bson.objectid import ObjectId
-
 from passlib.hash import bcrypt
 from fastapi.security import OAuth2PasswordBearer
 import jwt
 from server.API.common import user_helper,user_collection
 from dotenv import load_dotenv
 import os
+import math
 
 load_dotenv()
 
 JWT_SECRET = os.getenv("JWT_SECRET")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='/user/token')
 logger = APILogger(__name__, 'user')
-
+#initialise logger here so that when each function is called, the logger will write to the logs.
 
 async def retrieve_users():
     users = []
@@ -26,30 +27,54 @@ async def retrieve_users():
 #checks for duplicate email before saving into database
 # Add new user into to the database
 async def add_user(user_data: dict) -> dict:
+    #hash the password before saving into the database
     user_data['HashedPassword'] = bcrypt.hash(user_data["HashedPassword"])
-    dup = await user_collection.find_one({"Email": user_data["Email"]})
+    dup = await user_collection.find_one({"id": user_data["id"]})
     if dup:
-        logger.error("add_user", user_data["Email"],"Duplicate user")
+        logger.error("add_user", user_data["id"],"Duplicate user")
         return False
-        
+  #ensure that there are no duplicate users      
     else:
         user = await user_collection.insert_one(user_data)
         new_user = await user_collection.find_one({"_id": user.inserted_id})
         newuser=user_helper(new_user)
-        logger.record(function="New user added", arguments=newuser['Email'])
+        logger.record(function="New user added", arguments=newuser['id'])
+        #logger record the new user id created
         return (newuser)
 #can use bcrypt.using(rounds=13).hash("password")
 #change round to change salt
 
 # Retrieve a user with a matching ID
 async def retrieve_user(id: str) -> dict:
-    user = await user_collection.find_one({"_id": ObjectId(id)})
+    user = await user_collection.find_one({"id": id})
     if user:
-        logger.record(function="User retrieved", arguments=user['Email'])
+        logger.record(function="User retrieved", arguments=user['id'])
         return user_helper(user)
     else:       
         logger.error(function="retrieve_user", arguments=id, reason="User not found")
         raise HTTPException("user not found")
+
+#retrieve nearby users
+async def get_nearby_users(id: str) -> dict:
+    user = await user_collection.find_one({"id": id})
+    if user:
+        address=user['address']
+        latfloor=math.floor(address[0]) #create lowerbond for lat
+        latceiling=math.ceil(address[0])  #upperbound for lat
+        longfloor=math.floor(address[1])  #lowerbond for long
+        longceiling=math.ceil(address[1]) #upperbound for long
+        nearbyusers=[]
+        async for nearbyuser in user_collection.find({"address.0":{"$gt":latfloor}} and {"address.0":{"$lt":latceiling}} and {"address.1":{"$gt":longfloor}} and {"address.1":{"$lt":longceiling}}):
+            nearbyusers.append(user_helper(nearbyuser))
+            #append results into a list
+        logger.record(function="Nearby users retrieved", arguments=id)
+        # print(nearbyusers)
+        return (nearbyusers)
+    
+    else:       
+        logger.error(function="retrieve_user", arguments=id, reason="User not found")
+        raise HTTPException("user not found")
+
 
 async def get_user_from_token(token: str)->dict:
         payload = jwt.decode(token, JWT_SECRET, algorithms=['HS256'])

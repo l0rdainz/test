@@ -1,0 +1,32 @@
+2022-04-30 22:07:12,300 | INFO | server.API.user | All user retrieved | Admin Action
+2022-04-30 22:07:36,098 | INFO | server.API.user | All user retrieved | Admin Action
+2022-04-30 22:12:14,485 | ERROR | server.API.user | add_user | jdoe@x.edu.ng | Duplicate user
+2022-04-30 22:12:35,367 | ERROR | server.API.user | add_user | l0rdainz | Duplicate user
+2022-04-30 22:18:54,515 | ERROR | server.API.user | add_user | l0rdainz | Duplicate user
+2022-04-30 22:19:34,285 | INFO | server.API.user | User retrieved | l0rdainz
+2022-05-01 08:39:16,628 | INFO | server.API.user | New user added | 626dd6b4df798e7378cdba33
+2022-05-01 09:03:22,427 | INFO | server.API.user | All user retrieved | Admin Action
+2022-05-01 09:05:49,671 | INFO | server.API.user | User retrieved | l0rdainz
+2022-05-01 09:11:29,894 | INFO | server.API.user | User retrieved | l0rdainz
+2022-05-01 09:12:57,067 | INFO | server.API.user | User retrieved | l0rdainz
+2022-05-01 09:15:27,867 | INFO | server.API.user | User retrieved | l0rdainz
+2022-05-01 09:15:57,907 | INFO | server.API.user | User retrieved | l0rdainz
+2022-05-01 09:16:12,573 | INFO | server.API.user | User retrieved | l0rdainz
+2022-05-01 09:16:51,577 | INFO | server.API.user | User retrieved | l0rdainz
+2022-05-01 09:49:15,324 | INFO | server.API.user | User retrieved | l0rdainz
+2022-05-01 09:57:30,112 | INFO | server.API.user | All user retrieved | Admin Action
+2022-05-01 09:58:19,930 | INFO | server.API.user | New user added | 626de93babb407264fa96ccc
+2022-05-01 10:00:50,012 | INFO | server.API.user | Users retrieved | [{'_id': ObjectId('626dd6b4df798e7378cdba33'), 'name': 'John Doe', 'Email': 'jdoe@x.edu.ng', 'address': [-80.3411, 100.2312], 'id': 'l0rdainz', 'dob': '08/03/97', 'description': 'this is a testing acc', 'HashedPassword': '$2b$12$.4M4dUUzIs1VNTKQrbMlAeCj9qL6X/PfEnayCqpkFGa9L1Y3tdswq', 'createdAt': '01/05/2022'}, {'_id': ObjectId('626de93babb407264fa96ccc'), 'name': 'John Doe', 'Email': 'jdoe@x.edu.ng', 'address': [-80.9411, 100.2312], 'id': 'test1', 'dob': '08/03/97', 'description': 'this is another testing acc', 'HashedPassword': '$2b$12$o6pRa7tabPatq3j5GT1JvecAsuMyLkXHzxnWDPvF8ifBbazEXztrW', 'createdAt': '01/05/2022', 'friends': None}]
+2022-05-01 10:01:51,058 | INFO | server.API.user | Users retrieved | l0rdainz
+2022-05-01 10:03:49,291 | INFO | server.API.user | nearby users retrieved | [-80.3411, 100.2312]
+2022-05-01 10:04:01,653 | INFO | server.API.user | nearby users retrieved | [-80.3411, 100.2312]
+2022-05-01 10:04:07,097 | INFO | server.API.user | nearby users retrieved | [-80.3411, 100.2312]
+2022-05-01 10:04:23,441 | INFO | server.API.user | All user retrieved | Admin Action
+2022-05-01 10:05:35,188 | INFO | server.API.user | nearby users retrieved | [-80.3411, 100.2312]
+2022-05-01 10:07:17,046 | INFO | server.API.user | nearby users retrieved | [-80.3411, 100.2312]
+2022-05-01 10:07:26,265 | INFO | server.API.user | nearby users retrieved | [-80.3411, 100.2312]
+2022-05-01 10:09:03,968 | INFO | server.API.user | nearby users retrieved | [-80.3411, 100.2312]
+2022-05-01 10:09:34,405 | INFO | server.API.user | nearby users retrieved | [-80.3411, 100.2312]
+2022-05-01 10:10:38,881 | INFO | server.API.user | nearby users retrieved | l0rdainz
+2022-05-01 10:11:56,338 | INFO | server.API.user | Nearby users retrieved | l0rdainz
+2022-05-01 10:11:58,275 | INFO | server.API.user | Nearby users retrieved | l0rdainz
