@@ -15,3 +15,5 @@ Alternatively, feel free to use Mongo Atlas
 
 4. Then, run pip install -r requirements.txt to download the required libraries.
 
+5. Run python main.py to host the backend server
+
