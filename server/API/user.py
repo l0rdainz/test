@@ -17,11 +17,12 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl='/user/token')
 logger = APILogger(__name__, 'user')
 #initialise logger here so that when each function is called, the logger will write to the logs.
 
+#retrieve all users
 async def retrieve_users():
     users = []
     async for user in user_collection.find():
         users.append(user_helper(user))
-    logger.record("All user retrieved", "Admin Action")
+    logger.record("All user retrieved", "Admin Action") 
     return users
 
 #checks for duplicate email before saving into database
@@ -33,7 +34,7 @@ async def add_user(user_data: dict) -> dict:
     if dup:
         logger.error("add_user", user_data["id"],"Duplicate user")
         return False
-  #ensure that there are no duplicate users      
+  #ensure that there are no duplicate users ie unique user Id     
     else:
         user = await user_collection.insert_one(user_data)
         new_user = await user_collection.find_one({"_id": user.inserted_id})
@@ -44,11 +45,24 @@ async def add_user(user_data: dict) -> dict:
 #can use bcrypt.using(rounds=13).hash("password")
 #change round to change salt
 
+async def add_friend(id:str,data:str) -> dict:
+    user = await user_collection.find_one({"id": id}) #first check if the userId exist
+    if user:
+        updated_user = await user_collection.update_one(
+         {"id": id}, {"$push": {'friends':data['friends']}} #if it does add into the friendlist
+    )
+    if updated_user:
+            logger.record(function="Friend updated", arguments=user['id']) #update with logging
+            return True
+    logger.error(function="add_friend", arguments=user['id'],reason="Invalid id")
+    return False
+
+
 # Retrieve a user with a matching ID
 async def retrieve_user(id: str) -> dict:
     user = await user_collection.find_one({"id": id})
     if user:
-        logger.record(function="User retrieved", arguments=user['id'])
+        logger.record(function="User retrieved", arguments=user['id']) #log userid because it is suspicious to be fetching the same user over and over again
         return user_helper(user)
     else:       
         logger.error(function="retrieve_user", arguments=id, reason="User not found")
@@ -58,6 +72,7 @@ async def retrieve_user(id: str) -> dict:
 async def get_nearby_users(id: str) -> dict:
     user = await user_collection.find_one({"id": id})
     if user:
+        
         address=user['address']
         latfloor=math.floor(address[0]) #create lowerbond for lat
         latceiling=math.ceil(address[0])  #upperbound for lat
@@ -65,7 +80,8 @@ async def get_nearby_users(id: str) -> dict:
         longceiling=math.ceil(address[1]) #upperbound for long
         nearbyusers=[]
         async for nearbyuser in user_collection.find({"address.0":{"$gt":latfloor}} and {"address.0":{"$lt":latceiling}} and {"address.1":{"$gt":longfloor}} and {"address.1":{"$lt":longceiling}}):
-            nearbyusers.append(user_helper(nearbyuser))
+            if nearbyuser["id"] in user["friends"]:
+                nearbyusers.append(user_helper(nearbyuser))
             #append results into a list
         logger.record(function="Nearby users retrieved", arguments=id)
         # print(nearbyusers)
@@ -95,21 +111,21 @@ async def update_user(id: str, data: dict):
     user = await user_collection.find_one({"_id": ObjectId(id)})
     if user:
         updated_user = await user_collection.update_one(
-            {"_id": ObjectId(id)}, {"$set": data}
+            {"_id": ObjectId(id)}, {"$set": data} #update the database depending on the data sent
         )
         if updated_user:
-            logger.record(function="User's detail updated", arguments=user['Email'])
+            logger.record(function="User's detail updated", arguments=user['id']) #record the user name
             return True
-    logger.error(function="update_user", arguments=user['Email'],reason="Invalid id")
+    logger.error(function="update_user", arguments=user['id'],reason="Invalid id")
     return False
 
 
 # Delete 
 async def delete_user(id: str):
-    user = await user_collection.find_one({"_id": ObjectId(id)})
+    user = await user_collection.find_one({"id": id})
     if user:
-        await user_collection.delete_one({"_id": ObjectId(id)})
-        logger.record("user removed", user["Email"]+ "Admin action")
+        await user_collection.delete_one({"id": id})
+        logger.record("user removed", 'userid:'+ user["id"]+ "Admin action") #delete user
         return True
 
 #Authentication

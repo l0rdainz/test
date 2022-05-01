@@ -8,14 +8,14 @@ from enum import Enum
 class user(BaseModel):
     name: str = Field(...)
     Email: EmailStr = Field(...)
-    address: list=Field(...) #expect a list eg [-80.3411,100.2312]
+    address: list=Field(...) #expect a list eg [-80.3411,100.2312] in decimal degrees
     id:str=Field(...)
     dob: str=Field(...)
     description: str=Field(...)
     HashedPassword: str = Field(...)
-    createdAt: str=date.today().strftime("%d/%m/%Y")
-    friends: Optional[list]
-    
+    createdAt: str=date.today().strftime("%d/%m/%Y") #automatically add current date
+    friends: list=[]
+
     @validator ("address")
     def valid_add(cls,value):
         if value[0] > -90 and value[0] <90 and value[1] > -180 and value [1] < 180 :
@@ -41,13 +41,14 @@ class Updateuser(BaseModel):
     name: Optional[str]
     id: Optional[str]
     dob: Optional[str]
-    address: Optional[str]
+    address: Optional[list]
     description: Optional[str]
+    friends: Optional[str]
     class Config:
         schema_extra = {
             "example": {
                 "name": "New John Doe",
-                "address": "SG 91237224"
+                "address": "[-81,117]"
             }
         }
 

@@ -30,3 +30,44 @@
 2022-05-01 10:10:38,881 | INFO | server.API.user | nearby users retrieved | l0rdainz
 2022-05-01 10:11:56,338 | INFO | server.API.user | Nearby users retrieved | l0rdainz
 2022-05-01 10:11:58,275 | INFO | server.API.user | Nearby users retrieved | l0rdainz
+2022-05-01 10:17:32,437 | INFO | server.API.user | user removed | test1Admin action
+2022-05-01 11:14:26,450 | INFO | server.API.user | Friend updated | l0rdainz
+2022-05-01 11:14:37,634 | INFO | server.API.user | All user retrieved | Admin Action
+2022-05-01 11:15:23,565 | INFO | server.API.user | All user retrieved | Admin Action
+2022-05-01 11:15:45,891 | INFO | server.API.user | Friend updated | l0rdainz
+2022-05-01 11:15:52,464 | INFO | server.API.user | All user retrieved | Admin Action
+2022-05-01 11:19:11,142 | INFO | server.API.user | All user retrieved | Admin Action
+2022-05-01 11:20:29,014 | INFO | server.API.user | Friend updated | l0rdainz
+2022-05-01 11:20:34,610 | INFO | server.API.user | All user retrieved | Admin Action
+2022-05-01 11:21:23,504 | INFO | server.API.user | Friend updated | l0rdainz
+2022-05-01 11:21:27,673 | INFO | server.API.user | All user retrieved | Admin Action
+2022-05-01 11:21:40,730 | INFO | server.API.user | user removed | userid:l0rdainzAdmin action
+2022-05-01 11:22:00,553 | INFO | server.API.user | New user added | 626dfcd87f3dab96a2477eb6
+2022-05-01 11:22:12,431 | INFO | server.API.user | New user added | 626dfce47f3dab96a2477eb7
+2022-05-01 11:22:22,167 | INFO | server.API.user | New user added | 626dfcee7f3dab96a2477eb8
+2022-05-01 11:22:30,994 | INFO | server.API.user | Friend updated | l0rdainz
+2022-05-01 11:22:37,772 | INFO | server.API.user | All user retrieved | Admin Action
+2022-05-01 11:23:04,391 | INFO | server.API.user | New user added | 626dfd187f3dab96a2477eb9
+2022-05-01 11:23:11,981 | INFO | server.API.user | Nearby users retrieved | l0rdainz
+2022-05-01 11:23:14,286 | INFO | server.API.user | Nearby users retrieved | l0rdainz
+2022-05-01 11:23:54,610 | INFO | server.API.user | New user added | 626dfd4a7f3dab96a2477eba
+2022-05-01 11:23:58,091 | INFO | server.API.user | Nearby users retrieved | l0rdainz
+2022-05-01 11:24:17,697 | INFO | server.API.user | All user retrieved | Admin Action
+2022-05-01 11:24:33,699 | INFO | server.API.user | New user added | 626dfd717f3dab96a2477ebb
+2022-05-01 11:24:43,691 | INFO | server.API.user | Nearby users retrieved | l0rdainz
+2022-05-01 11:27:02,607 | INFO | server.API.user | Nearby users retrieved | l0rdainz
+2022-05-01 11:27:30,838 | INFO | server.API.user | Nearby users retrieved | l0rdainz
+2022-05-01 11:27:59,141 | INFO | server.API.user | Nearby users retrieved | l0rdainz
+2022-05-01 11:28:04,205 | INFO | server.API.user | Nearby users retrieved | l0rdainz
+2022-05-01 11:28:23,048 | INFO | server.API.user | Nearby users retrieved | l0rdainz
+2022-05-01 11:29:02,879 | INFO | server.API.user | Nearby users retrieved | l0rdainz
+2022-05-01 11:29:47,485 | INFO | server.API.user | Nearby users retrieved | l0rdainz
+2022-05-01 11:30:10,069 | INFO | server.API.user | Friend updated | l0rdainz
+2022-05-01 11:30:14,464 | INFO | server.API.user | All user retrieved | Admin Action
+2022-05-01 11:30:23,493 | INFO | server.API.user | Nearby users retrieved | l0rdainz
+2022-05-01 11:30:44,290 | INFO | server.API.user | Nearby users retrieved | l0rdainz
+2022-05-01 11:31:26,076 | INFO | server.API.user | Nearby users retrieved | l0rdainz
+2022-05-01 11:31:52,478 | INFO | server.API.user | Nearby users retrieved | l0rdainz
+2022-05-01 11:33:03,209 | INFO | server.API.user | Nearby users retrieved | l0rdainz
+2022-05-01 11:35:16,151 | INFO | server.API.user | Nearby users retrieved | l0rdainz
+2022-05-01 11:35:43,432 | INFO | server.API.user | Nearby users retrieved | l0rdainz

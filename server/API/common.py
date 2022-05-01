@@ -22,6 +22,7 @@ def user_helper(user) -> dict:
         "CreatedAt": user["createdAt"],
         "Dateofbirth":user["dob"],
         "Addr":user["address"],
-        "HashedPassword": user["HashedPassword"]
+        "HashedPassword": user["HashedPassword"],
+        "friends":user["friends"]
        
     }

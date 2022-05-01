@@ -17,7 +17,8 @@ from server.API.user import (
     update_user,
     authenticate_user,
     get_user_from_token,
-    get_nearby_users
+    get_nearby_users,
+    add_friend
 )
 from server.schema.user import (
     ErrorResponseModel,
@@ -107,7 +108,21 @@ async def update_user_data(id: str, req: Updateuser = Body(...)):
         404,
         "There was an error updating the data.",
     )
-#need to check whether this part is all users can delete any id 
+@router.put("/friend/{id}")
+async def update_user_friend_data(id: str, req: Updateuser = Body(...)):
+    req = {k: v for k, v in req.dict().items() if v is not None}
+    updated_user = await add_friend(id, req)
+    if updated_user:
+        return ResponseModel(
+            "User with ID: {} has been updated successfully".format(id),
+            "updated successfully",
+        )
+    return ErrorResponseModel(
+        "An error occurred",
+        404,
+        "There was an error updating the data.",
+    )
+
 @router.delete("/delete/{id}", response_description="User data removed from the database")
 async def delete_user_data(id: str):
     deleted_user = await delete_user(id)
