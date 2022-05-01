@@ -1,24 +1,29 @@
-
 from fastapi import FastAPI
 from server.routes.user import router as userRouter
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import RedirectResponse
+import pytest
+from httpx import AsyncClient
 
 
+tags_metadata = [
+    {
+        "name": "User",
+        "description": "Operations with users. The **login** logic is also here.",
+    },
+
+   
+]
 app = FastAPI(
     title="Ryde Back-end Developer",
     description="REST API and Static Web Server",
     version="0.0.1",
-    openapi_url="/openapi.json",
-    # openapi_url=None
-    # docs_url=None
+   
+   openapi_tags=tags_metadata,
 )
 
+#need to edit this before putting into prod
 origins = [
-    "http://localhost",
-    "http://localhost:8080",
-    "http://localhost:8081/",
-    "http://127.0.0.1:8081",
     "http://localhost:8000",
     "*"
   
@@ -40,4 +45,6 @@ app.include_router(userRouter, tags=["User"], prefix="/user")
 @app.get('/')
 def redirect_web():
     return RedirectResponse('/docs')
+
+#solely for dev purpose
 

@@ -80,8 +80,8 @@ async def get_nearby_users(id: str) -> dict:
         longceiling=math.ceil(address[1]) #upperbound for long
         nearbyusers=[]
         async for nearbyuser in user_collection.find({"address.0":{"$gt":latfloor}} and {"address.0":{"$lt":latceiling}} and {"address.1":{"$gt":longfloor}} and {"address.1":{"$lt":longceiling}}):
-            if nearbyuser["id"] in user["friends"]:
-                nearbyusers.append(user_helper(nearbyuser))
+            if nearbyuser["id"] in user["friends"]: #check if person is in friendlist
+                nearbyusers.append(user_helper(nearbyuser)) 
             #append results into a list
         logger.record(function="Nearby users retrieved", arguments=id)
         # print(nearbyusers)
